@@ -21,6 +21,7 @@ module "netkoth_instance" {
 resource "aws_security_group" "netkoth_security_group" {
   name = "netkoth"
   description = "Allow HTTP and SSH traffic via Terraform"
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port   = 80
