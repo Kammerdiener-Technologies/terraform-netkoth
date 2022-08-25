@@ -8,7 +8,7 @@ module "netkoth_instance" {
   instance_type               = var.netkoth_server_instance_type
   key_name                    = aws_key_pair.netkoth_pair.key_name
   monitoring                  = true
-  vpc_security_group_ids      = module.netkoth_security_group.vpc_security_group_ids
+  vpc_security_group_ids      = [aws_security_group.netkoth_security_group.id]
   associate_public_ip_address = true
 
   tags = {
@@ -16,14 +16,35 @@ module "netkoth_instance" {
   }
 }
 
-module "netkoth_security_group" {
-  source = "terraform-aws-modules/security-group/aws"
+resource "aws_security_group" "netkoth_security_group" {
+  name = "netkoth"
+  description = "Allow HTTP and SSH traffic via Terraform"
 
-  name        = "netkoth"
-  description = "security group for the netkoth server"
-  vpc_id      = module.vpc.vpc_id
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "https-443-tcp"]
-  egress_rules        = ["all-all"]
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
