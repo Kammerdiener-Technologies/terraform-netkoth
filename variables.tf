@@ -28,12 +28,6 @@ variable "netkoth_server_key" {
   description = "What key pair do you want for the NetKOTH server"
 }
 
-variable "netkoth_server_instance_type" {
-  type        = string
-  default     = "t2.micro"
-  description = "What instance type do you want for the netkoth instance"
-}
-
 variable "compromised_server_ami" {
   type        = string
   default     = "ami-0f25c84483cb26390"
