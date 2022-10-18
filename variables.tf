@@ -29,9 +29,11 @@ variable "netkoth_server_key" {
 }
 
 variable "compromised_server_ami" {
-  type        = string
-  default     = "ami-0f25c84483cb26390"
-  description = "What AMI is compromised"
+  type        = map
+  default     = {
+    "1" = "ami-06cae005502e73112"
+  }
+  description = "Map of AMIs"
 }
 
 variable "compromised_server_key" {

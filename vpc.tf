@@ -4,7 +4,7 @@ module "vpc" {
 
   name = var.vpc_name
 
-  enable_vpn_gateway   = var.enable_vpn
+  enable_vpn_gateway   = false
   azs                  = data.aws_availability_zones.available.names
   cidr                 = "10.0.0.0/16"
   enable_dns_hostnames = true

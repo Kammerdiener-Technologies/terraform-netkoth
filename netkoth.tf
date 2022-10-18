@@ -51,3 +51,12 @@ resource "aws_security_group" "netkoth_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_network_interface" "private_subnet" {
+  subnet_id       = module.vpc.private_subnets[0]
+
+  attachment {
+    instance     = module.netkoth_instance.id
+    device_index = 1
+  }
+}
