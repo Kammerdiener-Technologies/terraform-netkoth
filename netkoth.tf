@@ -8,7 +8,7 @@ module "netkoth_instance" {
   instance_type               = var.netkoth_server_instance_type
   key_name                    = aws_key_pair.netkoth_pair.key_name
   monitoring                  = true
-  vpc_security_group_ids      = [aws_security_group.netkoth_security_group.id]
+  vpc_security_group_ids      = [aws_security_group.netkoth_scoring_security_group.id]
   subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = true
 
