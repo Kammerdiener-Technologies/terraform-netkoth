@@ -12,7 +12,7 @@ variable "logs" {
 
 variable "netkoth_server_ami" {
   type        = string
-  default     = "ami-0f25c84483cb26390"
+  default     = "ami-0ebbc99eeaea502e0"
   description = "What AMI do you want to use to score netkoth"
 }
 

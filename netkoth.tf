@@ -18,9 +18,9 @@ module "netkoth_instance" {
   }
 }
 
-resource "aws_security_group" "netkoth_security_group" {
-  name = "netkoth"
-  description = "Allow HTTP and SSH traffic via Terraform"
+resource "aws_security_group" "netkoth_scoring_security_group" {
+  name = "netkoth-scoring"
+  description = "Allow HTTP and SSH traffic to scoring server"
   vpc_id = module.vpc.vpc_id
 
   ingress {
@@ -50,13 +50,9 @@ resource "aws_security_group" "netkoth_security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
 
-resource "aws_network_interface" "private_subnet" {
-  subnet_id       = module.vpc.private_subnets[0]
-
-  attachment {
-    instance     = module.netkoth_instance.id
-    device_index = 1
+  tags = {
+    Terraform   = "true"
+    Compromised = "false"
   }
 }

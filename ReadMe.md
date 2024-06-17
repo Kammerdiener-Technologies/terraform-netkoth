@@ -20,3 +20,6 @@ module "netkoth" {
 }
 
 ```
+
+After that you will need to setup a VPN in order to access: https://dev.to/kasukur/how-to-setup-an-aws-client-vpn-51f
+You can skip the part about creating a VPC since that is created in the Module. 
